@@ -1,241 +1,99 @@
-<!DOCTYPE html>
-<html>
-  <head>
-    <title>Ruby on Rails: Welcome aboard</title>
-    <style type="text/css" media="screen">
-      body {
-        margin: 0;
-        margin-bottom: 25px;
-        padding: 0;
-        background-color: #f0f0f0;
-        font-family: "Lucida Grande", "Bitstream Vera Sans", "Verdana";
-        font-size: 13px;
-        color: #333;
-      }
 
-      h1 {
-        font-size: 28px;
-        color: #000;
-      }
+<h4>YAY! THE FIRST POST! You can read it here, with this super ugly html style, or find slightly better version here: <a href="https://docs.google.com/document/d/19dqsZSosqntk95yxthDdePS55COpTQix75vJvOZbO9c/edit?usp=sharing">google doc</a> </h4>
 
-      a  {color: #03c}
-      a:hover {
-        background-color: #03c;
-        color: white;
-        text-decoration: none;
-      }
+<br/>
 
+<body style="margin-left: 50px;">
+<h2>Synchronizing git repositories - how to?</h2>
 
-      #page {
-        background-color: #f0f0f0;
-        width: 750px;
-        margin: 0;
-        margin-left: auto;
-        margin-right: auto;
-      }
+<br/>
+<br/>
 
-      #content {
-        float: left;
-        background-color: white;
-        border: 3px solid #aaa;
-        border-top: none;
-        padding: 25px;
-        width: 500px;
-      }
+<h4>Step 1:  Git  Remotes</h4>
 
-      #sidebar {
-        float: right;
-        width: 175px;
-      }
+<br/>
 
-      #footer {
-        clear: both;
-      }
+<p>What is a git remote repository? Remote repositories are versions of your project that are hosted on the Internet(e.g. GitHub) or network somewhere (e.g. on your computer).</p>
 
-      #header, #about, #getting-started {
-        padding-left: 75px;
-        padding-right: 30px;
-      }
+<p>The goal is to synchronize your local, origin and upstream remote.
+<ul>
+  <li>UPSTREAM - upstream project repository on GitHub (original one)</li>
+  <li>ORIGIN - forked project repository on your personal GitHub account</li>
+  <li>LOCAL - cloned repository on your computer</li>
+</ul>
+</p>
 
+<p>In your application directory:</p>
 
-      #header {
-        background-image: url("assets/rails.png");
-        background-repeat: no-repeat;
-        background-position: top left;
-        height: 64px;
-      }
-      #header h1, #header h2 {margin: 0}
-      #header h2 {
-        color: #888;
-        font-weight: normal;
-        font-size: 16px;
-      }
+<div style="margin-left:70px; width:100%;">
+<p>git remote  -v</p>
+<p># shows current remotes</p> 
+<p>git remote add upstream htttps://github.com/otherusername/otherrepositoryname.git</p>
+<p># creates upstream remote</p>
+<p>git remote -v</p>
+<p># please, verify if new remote is created</p>
+</div>
 
+<br/>
+<br/>
 
-      #about h3 {
-        margin: 0;
-        margin-bottom: 10px;
-        font-size: 14px;
-      }
+<h4>Step 2:  Sync Upstream and Local Remote</h4>
 
-      #about-content {
-        background-color: #ffd;
-        border: 1px solid #fc0;
-        margin-left: -55px;
-        margin-right: -10px;
-      }
-      #about-content table {
-        margin-top: 10px;
-        margin-bottom: 10px;
-        font-size: 11px;
-        border-collapse: collapse;
-      }
-      #about-content td {
-        padding: 10px;
-        padding-top: 3px;
-        padding-bottom: 3px;
-      }
-      #about-content td.name  {color: #555}
-      #about-content td.value {color: #000}
+<br/>
 
-      #about-content ul {
-        padding: 0;
-        list-style-type: none;
-      }
+<div style="margin-left:70px; width:100%;">
+<p>git fetch upstream</p>
+<p># grabbing upstream branches</p>
+<p>git branch -va</p>
+<p># see branches list from all remotes</p>
+</div>
 
-      #about-content.failure {
-        background-color: #fcc;
-        border: 1px solid #f00;
-      }
-      #about-content.failure p {
-        margin: 0;
-        padding: 10px;
-      }
+<p>If there were branches added to original repository (upstream), they are automatically added to local remote (and visible on the list via git branch -va).
+In case there were changes on a branch you had on your local remote before,  you have to merge each branch separately:</p>
+
+<div style="margin-left:70px; width:100%;">
+<p>git checkout master</p>
+<p># make sure you are on branch master</p>
+<p>git merge upstream/master</p>
+<p># merge upstream master into your local master</p>
+</div>
+
+<p>Repeat with all changed branches (if you want to have them synchronized :) )</p>
+<div style="margin-left:70px; width:100%;">
+<p>git checkout nameofthebranch</p>
+<p>git merge upstream/nameofthebranch</p>
+</div>
+
+<br/>
+
+<p>Tadaam! From now on you can use actual version of original repository (on your computer).</p>
+
+<br/>
+<br/>
+
+<h4>Step 3:  Sync Local and Origin Remote</h4>
+
+<br/>
+
+<p>To synchronize your origin remote, you have to push changes from your computer:</p>
+
+<div style="margin-left:70px; width:100%;">
+<p>git checkout nameofthebranch</p>
+<p># make sure you are on the branch you need to sync</p>
+<p>git push origin nameofthebranch</p>
+<p># pushes branch into origin, creates a new one in case it doesn’t exist</p>
+</div>
+
+<p>Repeat for all branches you want to synchronize.
+Be careful with names: git push nameofthebranch  tries to push version from your local remote into original one (upstream). And it will fail...</p>
+
+<br/>
+
+<p>Tadaam, taadaaam, taaadaaaam!!!  All remotes are the synchronized, plus you have your commits saved on origin remote.</p>
+
+<br/>
+<br/>
+<br/>
 
 
-      #getting-started {
-        border-top: 1px solid #ccc;
-        margin-top: 25px;
-        padding-top: 15px;
-      }
-      #getting-started h1 {
-        margin: 0;
-        font-size: 20px;
-      }
-      #getting-started h2 {
-        margin: 0;
-        font-size: 14px;
-        font-weight: normal;
-        color: #333;
-        margin-bottom: 25px;
-      }
-      #getting-started ol {
-        margin-left: 0;
-        padding-left: 0;
-      }
-      #getting-started li {
-        font-size: 18px;
-        color: #888;
-        margin-bottom: 25px;
-      }
-      #getting-started li h2 {
-        margin: 0;
-        font-weight: normal;
-        font-size: 18px;
-        color: #333;
-      }
-      #getting-started li p {
-        color: #555;
-        font-size: 13px;
-      }
-
-
-      #sidebar ul {
-        margin-left: 0;
-        padding-left: 0;
-      }
-      #sidebar ul h3 {
-        margin-top: 25px;
-        font-size: 16px;
-        padding-bottom: 10px;
-        border-bottom: 1px solid #ccc;
-      }
-      #sidebar li {
-        list-style-type: none;
-      }
-      #sidebar ul.links li {
-        margin-bottom: 5px;
-      }
-
-      .filename {
-        font-style: italic;
-      }
-    </style>
-    <script type="text/javascript">
-      function about() {
-        info = document.getElementById('about-content');
-        if (window.XMLHttpRequest)
-          { xhr = new XMLHttpRequest(); }
-        else
-          { xhr = new ActiveXObject("Microsoft.XMLHTTP"); }
-        xhr.open("GET","rails/info/properties",false);
-        xhr.send("");
-        info.innerHTML = xhr.responseText;
-        info.style.display = 'block'
-      }
-    </script>
-  </head>
-  <body>
-    <div id="page">
-      <div id="sidebar">
-        <ul id="sidebar-items">
-          <li>
-            <h3>Browse the documentation</h3>
-            <ul class="links">
-              <li><a href="http://guides.rubyonrails.org/">Rails Guides</a></li>
-              <li><a href="http://api.rubyonrails.org/">Rails API</a></li>
-              <li><a href="http://www.ruby-doc.org/core/">Ruby core</a></li>
-              <li><a href="http://www.ruby-doc.org/stdlib/">Ruby standard library</a></li>
-            </ul>
-          </li>
-        </ul>
-      </div>
-
-      <div id="content">
-        <div id="header">
-          <h1>Welcome aboard</h1>
-          <h2>You&rsquo;re riding Ruby on Rails!</h2>
-        </div>
-
-        <div id="about">
-          <h3><a href="rails/info/properties" onclick="about(); return false">About your application&rsquo;s environment</a></h3>
-          <div id="about-content" style="display: none"></div>
-        </div>
-
-        <div id="getting-started">
-          <h1>Getting started</h1>
-          <h2>Here&rsquo;s how to get rolling:</h2>
-
-          <ol>
-            <li>
-              <h2>Use <code>rails generate</code> to create your models and controllers</h2>
-              <p>To see all available options, run it without parameters.</p>
-            </li>
-
-            <li>
-              <h2>Set up a default route and remove <span class="filename">public/index.html</span></h2>
-              <p>Routes are set up in <span class="filename">config/routes.rb</span>.</p>
-            </li>
-
-            <li>
-              <h2>Create your database</h2>
-              <p>Run <code>rake db:create</code> to create your database. If you're not using SQLite (the default), edit <span class="filename">config/database.yml</span> with your username and password.</p>
-            </li>
-          </ol>
-        </div>
-      </div>
-
-      <div id="footer">&nbsp;</div>
-    </div>
-  </body>
-</html>
+</body>
