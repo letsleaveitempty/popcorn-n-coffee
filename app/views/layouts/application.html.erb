@@ -1,14 +1,43 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-  <title>PopcornNCoffee</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="shortcut icon" href="images/favicon.ico">
+  <title>Truman</title>
   <%= stylesheet_link_tag    "application", :media => "all" %>
-  <%= javascript_include_tag "application" %>
   <%= csrf_meta_tags %>
+
+  <!-- HTML5 shim, for IE6-8 support of HTML5 elements. All other JS at the end of file. -->
+  <!--[if lt IE 9]>
+    <script src="js/html5shiv.js"></script>
+  <![endif]-->
+  <%= javascript_include_tag "application" %>
+  <meta charset="utf-8">
 </head>
 <body>
 
-<%= yield %>
-
+<div class="container">
+  <div class="demo-row pbn">
+    <div class="demo-content-wide">
+      <div class="navbar">
+        <div class="navbar-inner">
+          <div class="container">
+             <!-- this is the responsive section dropdown -->
+            <button type="button" class="btn btn-navbar" data-toggle="collapse" data-target="#nav-collapse"></button>
+            <!-- this is the l/h brand button -->
+            <a href="/" class="brand fui-home"></a>
+            <div class="nav-collapse collapse" id="nav-collapse">
+              <ul class="nav">
+                <li><%= link_to "dashboard", root_path %></li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <%= yield %>
+</div>
 </body>
 </html>
+
